@@ -1,12 +1,14 @@
 import org.spongepowered.gradle.plugin.config.PluginLoaders
 import org.spongepowered.plugin.metadata.model.PluginDependency
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     `java-library`
     id("org.spongepowered.gradle.plugin") version "2.0.0"
+    kotlin("jvm") version "1.6.10"
 }
 
-group = "org.spongepowered"
+group = "org.example"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -22,7 +24,7 @@ sponge {
     }
     plugin("example") {
         displayName("Example")
-        entrypoint("org.spongepowered.example.Example")
+        entrypoint("org.example.Example")
         description("Just testing things...")
         links {
             homepage("https://spongepowered.org")
@@ -59,4 +61,15 @@ tasks.withType(JavaCompile::class).configureEach {
 tasks.withType(AbstractArchiveTask::class).configureEach {
     isReproducibleFileOrder = true
     isPreserveFileTimestamps = false
+}
+dependencies {
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.0")
+}
+val compileKotlin: KotlinCompile by tasks
+compileKotlin.kotlinOptions {
+    jvmTarget = "1.8"
+}
+val compileTestKotlin: KotlinCompile by tasks
+compileTestKotlin.kotlinOptions {
+    jvmTarget = "1.8"
 }
