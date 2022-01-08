@@ -6,6 +6,7 @@ plugins {
     `java-library`
     id("org.spongepowered.gradle.plugin") version "2.0.0"
     kotlin("jvm") version "1.6.10"
+    id("com.github.johnrengelman.shadow") version "7.1.2"
 }
 
 group = "org.example"
@@ -62,7 +63,9 @@ tasks.withType(AbstractArchiveTask::class).configureEach {
     isReproducibleFileOrder = true
     isPreserveFileTimestamps = false
 }
+
 dependencies {
+
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.0")
 }
 val compileKotlin: KotlinCompile by tasks
